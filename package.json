@@ -1,0 +1,15 @@
+{
+  "name": "Seller's-permit-automation",
+  "version": "1.0.0",
+  "description": "Using Chromium Playwright to automate the Seller's permit generation",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
