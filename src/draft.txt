@@ -62,11 +62,15 @@ const { chromium } = require('playwright');
     // 14. "Next" (click Button)
     await page.getByRole('button', { name: 'Next' }).click();
 
-    // 15. "I am the owner of the business" (check Check Box - Radio)
+    // 15. Fill in "Authenticatioin Information"
     await page.locator('#r-b3').check();
     await page.locator('#r-h3').fill("CHANtaiman@gmail.com");
     await page.locator('#r-i3').fill("CHANtaiman@gmail.com");
+    // commented out to prevent creating real account,
+    //   just for testing for now
     //await page.getByRole('button', { name: 'Save Draft' }).click();
+
+    // should get confirmation code if everything is correct
     //email: chantaiman@gmail.com and confirmation code: mxm5zc.
   
     await page.waitForTimeout(60000);
