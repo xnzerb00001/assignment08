@@ -33,7 +33,13 @@ const { chromium } = require('playwright');
 
     // 9. Fill in "Enter your address"
     await page.locator('#r-k1').fill("1 1ST ST");
+
+    /////////////////////////////////////////////////////////
+    // NOTE: use typo to trigger requireManualVerification logic
+    //   Francisco -> Francsico (DO NOT correct the typo)
     await page.locator('#r-n1').fill("San Francsico");
+    /////////////////////////////////////////////////////////
+
     await page.locator('#r-p1').fill("94105-2401");
     await page.getByRole('button', { name: 'Verify Address' }).click();
     try {
