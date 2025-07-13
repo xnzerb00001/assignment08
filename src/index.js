@@ -36,8 +36,20 @@ const { chromium } = require('playwright');
     await page.locator('#r-n1').fill("San Francsico");
     await page.locator('#r-p1').fill("94105-2401");
     await page.getByRole('button', { name: 'Verify Address' }).click();
-    await page.getByText('Verified', { exact: true }).click();
-    //await page.getByRole('button', { name: 'Save' }).click();
+    try {
+        // Properly wait for 'Verified' with timeout handling
+        const requireManualVerification = page.getByText('Verified', { exact: true });
+        await requireManualVerification.waitFor({ state: 'visible', timeout: 10000 });
+        console.log('Your inputted address is not found and requires manual verification');
+        await requireManualVerification.click();
+        console.log('"Verified" button clicked');
+    } catch (error) {
+        if (error.name === 'TimeoutError') {
+            console.log('Your inputted address is found and has been verified');
+        } else {
+            console.log('Address Verification status:', error.message);
+        }
+    }
     // 10. "Next" (click Button)
     await page.getByRole('button', { name: 'Next' }).click();
 
@@ -83,4 +95,3 @@ const { chromium } = require('playwright');
     await browser.close();
   }
 })();
-
